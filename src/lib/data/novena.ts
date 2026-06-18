@@ -7,6 +7,10 @@ export interface NovenaDia {
   oracao: string;
 }
 
+
+export const novenaInicio = "2026-06-17";
+export const novenaFesta = "2026-06-26";
+
 const oracaoComum = "Ó Deus, que por mediação da Santíssima Virgem Maria, concedestes inúmeras graças a São Josemaria, sacerdote, escolhendo-o como instrumento fidelíssimo para fundar o Opus Dei, caminho de santificação no trabalho profissional e no cumprimento dos deveres cotidianos do cristão, fazei que eu saiba também converter todos os momentos e circunstâncias da minha vida em ocasião de Vos amar, e de servir com alegria e com simplicidade a Igreja, o Romano Pontífice e as almas, iluminando os caminhos da terra com o resplendor da fé e do amor. Concedei-me por intercessão de São Josemaria o favor que vos peço. Assim seja.";
 
 export const novenaDias: NovenaDia[] = [
