@@ -50,6 +50,10 @@ function toCalendarDate(date: Date, time: string) {
 const inicioLabel = shortDate(novenaInicio);
 const festaLabel = shortDate(novenaFesta);
 
+// Opções de hora (00–23) e minutos (de 5 em 5) para o lembrete.
+const HORAS = Array.from({ length: 24 }, (_, h) => String(h).padStart(2, "0"));
+const MINUTOS = Array.from({ length: 12 }, (_, i) => String(i * 5).padStart(2, "0"));
+
 export default function NovenaContent() {
   const [diaAtual, setDiaAtual] = useState(1);
   const [feitos, setFeitos] = useState<number[]>([]);
@@ -359,18 +363,32 @@ export default function NovenaContent() {
           <div className="reminder">
             <h3 className="font-serif">Lembrete diário</h3>
             <p>Crie um compromisso no calendário para voltar todos os dias e rezar a novena até {festaLabel}.</p>
-            <div className="reminder-row">
-              <input
-                className="time-input"
-                type="time"
-                value={reminderTime}
-                onChange={(e) => setReminderTime(e.target.value || "08:00")}
-                aria-label="Horário do lembrete"
-              />
-              <button className="btn-pri" onClick={downloadIcs}>
-                Calendário
-              </button>
+            <div className="reminder-time">
+              <select
+                className="time-input time-select"
+                value={reminderTime.split(":")[0]}
+                onChange={(e) => setReminderTime(`${e.target.value}:${reminderTime.split(":")[1]}`)}
+                aria-label="Hora do lembrete"
+              >
+                {HORAS.map((h) => (
+                  <option key={h} value={h}>{h}</option>
+                ))}
+              </select>
+              <span className="time-sep">:</span>
+              <select
+                className="time-input time-select"
+                value={reminderTime.split(":")[1]}
+                onChange={(e) => setReminderTime(`${reminderTime.split(":")[0]}:${e.target.value}`)}
+                aria-label="Minutos do lembrete"
+              >
+                {MINUTOS.map((m) => (
+                  <option key={m} value={m}>{m}</option>
+                ))}
+              </select>
             </div>
+            <button className="btn-pri" onClick={downloadIcs}>
+              Calendário
+            </button>
             <button className="btn-sec" onClick={openGoogleCalendar}>
               Google Calendar
             </button>
