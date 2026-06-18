@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ExportContatos from "@/components/ExportContatos";
 
 export default function AdminPage() {
   return (
@@ -9,6 +10,7 @@ export default function AdminPage() {
       </div>
 
       <div className="psteps">
+        <ExportContatos />
         <Link href="/admin/vagas" style={{ textDecoration: "none" }}>
           <div className="pstep" style={{ cursor: "pointer" }}>
             <div className="psth">
